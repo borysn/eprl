@@ -8,7 +8,7 @@ list, add, remove portage resume items
 uage
 ----
 
-``$ eprl.py -h``
+``$ sudo ./eprl/eprl.py -h``
 
 license
 -------
