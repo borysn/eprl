@@ -1,12 +1,16 @@
-# eprl
+eprl
+====
 
 *edit portage resume list*
 
 list, add, remove portage resume items
 
-## uage
+uage
+----
 
-`$ eprl.py -h`
+``$ eprl.py -h``
 
-## license
-[MIT](/LICENSE)
+license
+-------
+
+`MIT </LICENSE>`__
