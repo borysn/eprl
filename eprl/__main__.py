@@ -17,9 +17,9 @@
 #   -b, --backup          perform operations on backup list
 #   -v, --version         show program's version number and exit
 import sys
-import util, vargs, dbstore, resolver
-from colors import tcolor, bcolors
-from util import status
+from eprl import util, vargs, dbstore, resolver
+from eprl.colors import tcolor
+from eprl.util import status
 
 # printResumeItems
 # output resume item list to console

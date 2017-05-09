@@ -1,9 +1,9 @@
 # dbstore.py
 # author: borysn
 # license: MIT
-import util
-from util import status
-from colors import tcolor
+from eprl import util
+from eprl.util import status
+from eprl.colors import tcolor
 # catch portage python module import error
 # probably a result of not running as root
 # continue script and attempt to error out

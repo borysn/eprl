@@ -2,7 +2,7 @@
 # author: borysn
 # license: MIT
 import os, sys
-from colors import bcolors
+from eprl.colors import bcolors
 
 # errorAndExit
 # display error msg and exit

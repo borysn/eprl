@@ -1,8 +1,8 @@
 # resolve.py
 # author: borysn
 # license: MIT
-import util
-from util import status
+from eprl import util
+from eprl.util import status
 try:
     import portage
 except:

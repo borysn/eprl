@@ -2,8 +2,8 @@
 # author: borysn
 # license: MIT
 import argparse
-import util, resolver
-from util import status
+from eprl import util, resolver
+from eprl.util import status
 try:
     import portage
 except:
@@ -111,7 +111,7 @@ def parseArgs():
     # which list to remove from
     parser.add_argument('-b', '--backup', action='store_true', help='perform operations on backup list')
     # version
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.2')
+    parser.add_argument('-v', '--version', action='version', version='eprl version 0.3')
 
     # parse arguments and return
     return parser.parse_args()

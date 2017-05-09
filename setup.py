@@ -1,19 +1,30 @@
 # setup.py
 # author: borysn
 # license: MIT
-from distutils.core import setup
+from setuptools import setup, find_packages
+from codecs import open
+from os import path
 
+# get current directory
+cwd = path.abspath(path.dirname(__file__))
+
+# get long description
+def getLongDesc():
+    return open(path.join(cwd, 'README.rst'), encoding='utf-8').read()
+
+# setup eprl
 setup(
     name='eprl',
     description='edit portage resume list',
-    long_description=open('README.txt').read(),
-    version='0.2',
+    long_description=getLongDesc(),
+    version='0.3',
     author='borysn',
     author_email='xborysn@gmail.com',
     url='https://github.com/borysn/eprl',
     keywords=['python3', 'script', 'portage', 'gentoo', 'linux'],
-    platforms=[],
-    packages=['eprl'],
+    packages = ['eprl'],
+    entry_points = {'console_scripts': ['eprl=eprl.__main__:main']},
+    install_requires=[],
     classifiers=[
         'Environment :: Console',
         'Intended Audience :: End Users/Desktop',
@@ -27,6 +38,5 @@ setup(
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities'
     ],
-    include_package_data=True,
     license='MIT'
 )
