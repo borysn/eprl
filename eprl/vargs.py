@@ -1,9 +1,13 @@
 # vargs.py
 # author: borysn
 # license: MIT
-import argparse, portage
+import argparse
 import util, resolver
 from util import status
+try:
+    import portage
+except:
+    pass
 
 # cantRemoveItem
 # validate if an item cant be removed from the resume point

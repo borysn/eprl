@@ -1,10 +1,12 @@
 # resolve.py
 # author: borysn
 # license: MIT
-import portage
 import util
 from util import status
-
+try:
+    import portage
+except:
+    pass
 # printMatches
 # print matches to console
 #
