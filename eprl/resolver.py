@@ -3,6 +3,7 @@
 # license: MIT
 import portage
 import util
+from util import status
 
 # printMatches
 # print matches to console
@@ -19,16 +20,17 @@ def printMatches(matches):
 # @return           index of user choice
 def askUserWhichMatch(matches):
     # init return
-    index = -1
+    selection = -1
     msg = '{}: {}'.format(status.WARN, 'which item would you like to use? ')
-    while True:
+    while not selection in range(len(matches)):
         # print matches
         printMatches(matches)
         # get user input
-        index = input(msg)
-        if index in range(len(matches)):
-            break
-    return index
+        userInput = input(msg)
+        # convert to int if possible
+        if userInput.isdigit():
+            selection = int(userInput)
+    return selection
 
 # userResolveItem
 # attempt to resolve a single item through user input
@@ -50,7 +52,7 @@ def resolveItems(items):
     # init return
     resolvedItems = []
     # get porttree dbapi object
-    dbapi = portage.dbapi.porttree.dbapi()
+    dbapi = portage.dbapi.porttree.portdbapi()
     # iterate items finding matches and resolving
     for item in items:
         # find matches
@@ -65,6 +67,6 @@ def resolveItems(items):
             resolvedItems.append(matches[0])
         elif len(matches) > 1:
             # user resolve matches and store
-            resolvedItems.append(userResolveItem(item, matches))
+            resolvedItems.append(matches[userResolveItem(item, matches)])
     # return result
     return resolvedItems

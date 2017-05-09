@@ -9,7 +9,7 @@
 # usage: eprl.py [-h] [-l] [-r ITEMNUM] [-b] [-v]
 #
 import sys
-import util, vargs, dbstore
+import util, vargs, dbstore, resolver
 from colors import tcolor, bcolors
 from util import status
 
@@ -71,7 +71,10 @@ def runScript(args, db):
         removePortageResumeItems(args.itemNums, db)
     # add portage resume item(s)
     elif args.items != None:
-        addPortageResumeItems(args.items, db)
+        # resolve dependencies
+        resolvedItems = resolver.resolveItems(args.items)
+        # add to portage resume list
+        addPortageResumeItems(resolvedItems, db)
 
 # main
 # root privilege check, parse & validate args, get mtimedb store, run script
@@ -79,20 +82,15 @@ def main():
     # check for correct privileges
     if util.userDoesNotHaveRootPrivileges():
         util.errorAndExit('eprl.py requires root privileges, try running with sudo')
-
     # get args
     args = vargs.parseArgs()
-
     # init db store for portage mtimedb
     db = dbstore.DBstore(args.backup)
-
     # validate args, exit if invalid
     if vargs.argsAreNotValid(args, db):
         util.errorAndExit('what to do, what to do...try {}'.format(tcolor.CTXT(tcolor.BLUE, '-h')))
-
     # execute script
     runScript(args, db)
-
     # exit succes
     sys.exit(0)
 

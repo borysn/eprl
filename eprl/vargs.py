@@ -2,7 +2,7 @@
 # author: borysn
 # license: MIT
 import argparse, portage
-import util
+import util, resolver
 from util import status
 
 # cantRemoveItem
@@ -49,6 +49,8 @@ def invalidItemNums(args, db):
 # invalidItems
 # check for invalid items
 #
+# TODO remove duplicates
+#
 # @param args    command line arguments
 # @return        true if any items specified are invalid, false otherwise
 def invalidItems(args):
@@ -58,9 +60,12 @@ def invalidItems(args):
     if args.items != None:
         # iterate items
         for item in args.items:
+            # init porttree dbapi
+            dbapi = portage.dbapi.porttree.portdbapi()
+            # try to find matches
             try:
                 # find any matches for a given item
-                matches = portage.dbapi.porttree.portdbapi().match(item)
+                matches = dbapi.match(item)
                 # no matches
                 if len(matches) == 0:
                     # error
@@ -68,8 +73,21 @@ def invalidItems(args):
                     # cannot match this item, arg not valid
                     itemsAreInvalid = True
                     break
-            except portage.exception.AmbiguousPackageName:
-                util.errorAndExit('can\'t validate a package name because it\'s ambiguous, try being more specific\n\ti.e. \'dev-lisp/asdf\' vs. \'asdf\'')
+            except portage.exception.AmbiguousPackageName as err:
+                # package name too ambiguous, resolve by user
+                # get packages
+                pstr = err.__str__()
+                # convert to list
+                packages = pstr.translate(dict.fromkeys(map(ord, u"[],\'"))).split(' ')
+                # have user resolve dependency discrepency
+                index = resolver.userResolveItem(item, packages)
+                # attempt to match resolved package
+                # it can be masked, so a match would result in an empty list
+                matches = dbapi.match(packages[index])
+                if len(matches) == 0:
+                    util.errorAndExit('looks like the "{}" package is masked'.format(packages[index]), False)
+                # save result in args
+                args.items[args.items.index(item)] = packages[index]
             except:
                 util.errorAndExit('something went wrong when attempting to validate your listed dependencies')
     # return result

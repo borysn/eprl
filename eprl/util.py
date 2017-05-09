@@ -8,9 +8,9 @@ from colors import bcolors
 # display error msg and exit
 #
 # @param msg    msg to be displayed
-def errorAndExit(msg):
+def errorAndExit(msg, sysflag=True):
     excInfo = sys.exc_info()
-    if excInfo[0] != None:
+    if excInfo[0] != None and sysflag:
         print(sys.exc_info())
     print('{}: {}'.format(status.ERROR, msg))
     sys.exit(2)
