@@ -109,7 +109,7 @@ def parseArgs():
     # add portage resume item(s)
     parser.add_argument('-a', '--add', action='store', dest='items', type=str, nargs='+', help='add resume item(s) to a resume list')
     # which list to remove from
-    parser.add_argument('-b', '--backup', action='store_true', help='specify list or removal from backup list')
+    parser.add_argument('-b', '--backup', action='store_true', help='perform operations on backup list')
     # version
     parser.add_argument('-v', '--version', action='version', version='%(prog)s 0.1')
 

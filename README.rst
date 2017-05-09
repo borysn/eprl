@@ -19,7 +19,7 @@ usage
                           remove portage resume items
     -a ITEMS [ITEMS ...], --add ITEMS [ITEMS ...]
                           add resume item(s) to a resume list
-    -b, --backup          specify list or removal from backup list
+    -b, --backup          perform operations on backup list
     -v, --version         show program's version number and exit
 
 license
