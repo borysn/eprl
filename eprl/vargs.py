@@ -47,10 +47,10 @@ def invalidItemNums(args, db):
     return itemNumsAreInvalid
 
 # invalidItems
-# check for invalid items, make corrections directly to args along the way if possible
+# check for invalid items
 #
 # @param args    command line arguments
-# @return        true if any items specified are invalid and cannot be corrected
+# @return        true if any items specified are invalid, false otherwise
 def invalidItems(args):
     # init return
     itemsAreInvalid = False
@@ -68,10 +68,6 @@ def invalidItems(args):
                     # cannot match this item, arg not valid
                     itemsAreInvalid = True
                     break
-                # one or more matches
-                elif len(matches) >= 1:
-                    # attempt to resolve matches against user input
-                    print('resolving matches')
             except portage.exception.AmbiguousPackageName:
                 util.errorAndExit('can\'t validate a package name because it\'s ambiguous, try being more specific\n\ti.e. \'dev-lisp/asdf\' vs. \'asdf\'')
             except:
