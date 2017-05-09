@@ -57,7 +57,7 @@ def resolveItems(items):
         matches = dbapi.match(item)
         # no matches
         if len(matches) == 0:
-            # if args were validateted correctly,
+            # if args were validated correctly,
             # there should never be a 0 match here
             util.errorAndExit('check dependency names, something\'s wrong')
         elif len(matches) == 1:
@@ -66,6 +66,5 @@ def resolveItems(items):
         elif len(matches) > 1:
             # user resolve matches and store
             resolvedItems.append(userResolveItem(item, matches))
-
     # return result
     return resolvedItems
