@@ -105,7 +105,7 @@ def parseArgs():
     # list portage resume items
     parser.add_argument('-l', '--list', action='store_true', help='list portage resume items')
     # remove portage resume item(s)
-    parser.add_argument('-r', '--remove', action='store', dest='itemNums', type=int, nargs="+", help='remove portage resume items') 
+    parser.add_argument('-r', '--remove', action='store', dest='itemNums', type=int, nargs="+", help='remove portage resume item(s)') 
     # add portage resume item(s)
     parser.add_argument('-a', '--add', action='store', dest='items', type=str, nargs='+', help='add resume item(s) to a resume list')
     # which list to remove from
