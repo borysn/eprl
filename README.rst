@@ -7,17 +7,24 @@ list, add, remove portage resume items
 
 install
 -------
+..
+    $ pip install eprl
 
-`$ pip install eprl`
 *or*
-`$ git clone https://github.com:borysn/eprl`
+
+..
+    $ git clone https://github.com:borysn/eprl
 
 usage
 -----
 
-`$ sudo -H python -m eprl -h`
+..
+     $ sudo -H python -m eprl -h
+
 *or*
-`$ cd eprl && sudo ./eprl/eprl.py -h`
+
+..
+     $ cd eprl && sudo ./eprl/eprl.py -h
 
 ::
 
