@@ -51,7 +51,6 @@ def listPortageResumeItems(db):
 # @param itemNum    valid portage resume item to be removed
 def removePortageResumeItems(itemNums, db):
     # confirm delete
-    # TODO resolve itemNums for proper input
     if util.userConfirmed(itemNums):
         # attempt to remove resume item
         db.removeItems(itemNums)
