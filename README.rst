@@ -11,12 +11,6 @@ install
 
     $ pip install eprl
 
-*or*
-
-..
-
-    $ git clone https://github.com:borysn/eprl
-
 run
 -----
 
@@ -24,26 +18,28 @@ run
 
      $ sudo -H python -m eprl -h
 
-*or*
-
-..
-
-     $ cd eprl && sudo ./eprl/eprl.py -h
-     
-
 usage
 -----
 
 ..
 
-  usage: eprl.py [-h] [-l] [-r ITEMNUMS [ITEMNUMS ...]] [-a ITEMS [ITEMS ...]] [-b] [-v]
+  usage: 
+    eprl.py 
+
+      [-h] [-l] 
+
+      [-r ITEMNUMS [ITEMNUMS ...]] 
+
+      [-a ITEMS [ITEMS ...]] 
+
+      [-b] [-v]
 
   optional arguments:
     -h, --help            show this help message and exit
     -l, --list            list portage resume items
-    -r ITEMNUMS [ITEMNUMS ...], --remove ITEMNUMS [ITEMNUMS ...]
+    -r ITEMNUMS, --remove ITEMNUMS
                           remove portage resume item(s)
-    -a ITEMS [ITEMS ...], --add ITEMS [ITEMS ...]
+    -a ITEMS, --add ITEMS
                           add resume item(s) to a resume list
     -b, --backup          perform operations on backup list
     -v, --version         show program's version number and exit
