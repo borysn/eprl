@@ -43,6 +43,11 @@ def userConfirmed(data):
 # @return    true if user does not have root privileges, false otherwise
 def userDoesNotHaveRootPrivileges(): return True if os.getuid() != 0 else False
 
+# getEprlVersion
+# get the current version of eprl
+def getEprlVersion():
+    return '0.7'
+
 # status
 # status log msg prefixes (with colors)
 class status:

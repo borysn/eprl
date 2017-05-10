@@ -1,2 +1,7 @@
 # __init__.py
-__version__ = '0.6'
+# author: borysn
+# license: MIT
+import eprl.util
+
+# __init__.py
+__version__ = util.getEprlVersion();

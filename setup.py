@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/bin/env python3
 #
 # setup.py
 # author: borysn
@@ -14,12 +14,17 @@ cwd = path.abspath(path.dirname(__file__))
 def getLongDesc():
     return open(path.join(cwd, 'README.rst'), encoding='utf-8').read()
 
+# getVersion()
+# get current eprl script version
+def getVersion():
+    return __import__('eprl').util.getEprlVersion()
+
 # setup eprl
 setup(
     name='eprl',
     description='edit portage resume list',
     long_description=getLongDesc(),
-    version='0.6',
+    version='{}'.format(getVersion()),
     author='borysn',
     author_email='xborysn@gmail.com',
     url='https://github.com/borysn/eprl',
