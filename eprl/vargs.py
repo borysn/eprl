@@ -111,7 +111,7 @@ def parseArgs():
     # which list to remove from
     parser.add_argument('-b', '--backup', action='store_true', help='perform operations on backup list')
     # version
-    parser.add_argument('-v', '--version', action='version', version='eprl version 0.4')
+    parser.add_argument('-v', '--version', action='version', version='eprl version 0.5')
 
     # parse arguments and return
     return parser.parse_args()
