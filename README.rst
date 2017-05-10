@@ -10,22 +10,21 @@ install
 
 ..
 
-    ``$ pip install eprl``
+    ``$ sudo pip install eprl``
 
 run
 ----
 
 ..
 
-    ``$ sudo -H python -m eprl -h``
+    ``$ sudo eprl -h``
     
 usage
 -----
 
 ..
 
-    **usage:**
-        *eprl.py*
+    **eprl.py:**
 
             ``[-h] [-l] [-b] [-v]``
 
@@ -34,6 +33,7 @@ usage
             ``[-r ITEMNUMS [ITEMNUMS ...]]``
 
     **optional arguments:**
+
         -h, --help              show this help message and exit
         -l, --list              list portage resume items
         -r ITEMNUMS, --remove ITEMNUMS
