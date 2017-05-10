@@ -29,9 +29,9 @@ usage
 
             ``[-h] [-l] [-b] [-v]``
 
-            ``[-a *ITEMS* [*ITEMS* ...]]``
+            ``[-a ITEMS [ITEMS ...]]``
 
-            ``[-r *ITEMNUMS* [*ITEMNUMS* ...]]``
+            ``[-r ITEMNUMS [ITEMNUMS ...]]``
 
     **optional arguments:**
         -h, --help              show this help message and exit
@@ -47,7 +47,7 @@ usage
 
     ..
 
-        $ eprl -b
+        $ eprl -bl
             - ``list items in backup resume list``
         $ eprl -br 0 1 2 3 4
             - ``remove items in backup resume list``
