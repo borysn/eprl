@@ -19,7 +19,7 @@ setup(
     name='eprl',
     description='edit portage resume list',
     long_description=getLongDesc(),
-    version='0.5',
+    version='0.6',
     author='borysn',
     author_email='xborysn@gmail.com',
     url='https://github.com/borysn/eprl',
