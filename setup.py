@@ -23,7 +23,7 @@ setup(
     author='borysn',
     author_email='xborysn@gmail.com',
     url='https://github.com/borysn/eprl',
-    keywords=['python3', 'script', 'portage', 'gentoo', 'linux'],
+    keywords='python3 script gentoo linux edit portage resume list',
     packages = ['eprl'],
     entry_points = {'console_scripts': ['eprl=eprl.__main__:main']},
     install_requires=[],
