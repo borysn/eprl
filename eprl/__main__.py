@@ -59,7 +59,8 @@ def removePortageResumeItems(itemNums, db):
         except:
             util.errorAndExit('could not remove items from resume list')
         # print success
-        print('{}: item "{}" removed from portage resume list'.format(status.SUCCESS, tcolor.CTXT(tcolor.PURPLE, itemNums)))
+        data = tcolor.CTXT(tcolor.PURPLE, itemNums)
+        print('{}: item "{}" removed from portage resume list'.format(status.SUCCESS, data))
 
 # addPortageResumeItems
 # add item(s) to a portage resume list
@@ -72,7 +73,8 @@ def addPortageResumeItems(items, db):
     except:
         util.errorAndExit('could not add items to resume list')
     # print success
-    print('{}: item(s)\n{}\nadded to portage resume list'.format(status.SUCCESS, tcolor.CTXT(tcolor.PURPLE, items)))
+    data = tcolor.CTXT(tcolor.PURPLE, items)
+    print('{}: item(s)\n{}\nadded to portage resume list'.format(status.SUCCESS, data))
 
 # runScript
 # run script as a function of args
@@ -107,7 +109,8 @@ def main():
         util.errorAndExit('could not init dbstore')
     # validate args, exit if invalid
     if vargs.argsAreNotValid(args, db):
-        util.errorAndExit('what to do, what to do...try {}'.format(tcolor.CTXT(tcolor.BLUE, '-h')))
+        data = tcolor.CTXT(tcolor.BLUE, '-h')
+        util.errorAndExit('what to do, what to do...try {}'.format(data))
     # execute script
     runScript(args, db)
     # exit succes

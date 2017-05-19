@@ -104,7 +104,7 @@ def invalidItems(args):
                 # have user resolve ambiguous package
                 args.items[index] = resolveAmbiguousItem(args, pstr, item, dbapi)
             except:
-                util.errorAndExit('something went wrong when attempting to validate your listed dependencies')
+                util.errorAndExit('failed to validate your listed dependencies')
     # return result
     return itemsAreInvalid
 
