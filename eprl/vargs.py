@@ -124,7 +124,7 @@ def parseArgs():
     # export portage resume list
     parser.add_argument('-e', '--export', action='store_true', help='export portage resume list')
     # import portage resume list
-    parser.add_argument('-i', '--import', action='store_true', help='import portage resume list')
+    parser.add_argument('-i', '--import', action='store_true', help='import portage resume list', dest='importing')
     # backup flag to target backup resume list
     parser.add_argument('-b', '--backup', action='store_true', help='perform operations on backup resume list')
     # version

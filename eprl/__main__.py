@@ -99,6 +99,12 @@ def runScript(args, db):
     # clear resume list
     elif args.clear == True:
         clearPortageResumeList(db)
+    # export resume list
+    elif args.export == True:
+        exportPortageResumeList(db)
+    # import resume list
+    elif args.importing == True:
+        importPortageResumeList(db)
     # remove portage resume item(s)
     elif args.itemNums != None:
         removePortageResumeItems(args.itemNums, db)
