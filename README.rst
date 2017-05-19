@@ -26,20 +26,25 @@ usage
 
     **eprl.py:**
 
-            ``[-h] [-l] [-b] [-v]``
+            ``[-h] [-l] [-c]``
 
             ``[-a ITEMS [ITEMS ...]]``
 
             ``[-r ITEMNUMS [ITEMNUMS ...]]``
 
+            ``[-e] [-i] [-b] [-v]``
+
     **optional arguments:**
 
         -h, --help              show this help message and exit
         -l, --list              list portage resume items
+        -c, --clear             clear portage resume list
         -r ITEMNUMS, --remove ITEMNUMS
                                 remove portage resume item(s)
         -a ITEMS, --add ITEMS
                                 add resume item(s) to a resume list
+        -e, --export            export portage resume list
+        -i, --import            import portage resume list
         -b, --backup            perform operations on backup list
         -v, --version           show program's version number and exit
 
