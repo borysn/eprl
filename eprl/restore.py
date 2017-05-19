@@ -2,6 +2,7 @@
 # author: borysn
 # license: MIT
 import os, datetime, re, pickle
+from eprl import util
 
 # RestorePRL
 # restore portage resume lists (export/import)
@@ -16,11 +17,11 @@ class RestorePRL:
             # create directory for storing data
             os.mkdir(self.dir)
 
-    # export
+    # exportData
     # export portage resume list
     #
     # @param data    portage mtimedb resume list data to be exported
-    def export(self, data):
+    def exportData(self, data):
         # file name datetime str
         file = re.sub(r'[^\w]', '', str(datetime.datetime.now()))
         # pickle data
@@ -29,3 +30,14 @@ class RestorePRL:
         pickle.dump(data, file)
         # close file
         file.close()
+
+    # importData
+    # import portage resume list
+    def importData(self):
+        # get exported data
+        exports = [os.path.join(self.dir, export) for export in os.listdir(self.dir)]
+        choice = util.askUserWhichItem(exports)
+        file = open(exports[choice], 'rb')
+        data = pickle.load(file)
+        file.close
+        return data

@@ -7,32 +7,6 @@ try:
     import portage
 except:
     pass
-# printMatches
-# print matches to console
-#
-# @param matches    matches to be printed
-def printMatches(matches):
-    for i in range(len(matches)):
-        print('{}: {}'.format(i, matches[i]))
-
-# askUserWhichMatch
-# ask user which match they'd like to use
-#
-# @param matches    m
-# @return           index of user choice
-def askUserWhichMatch(matches):
-    # init return
-    selection = -1
-    msg = '{}: {}'.format(status.WARN, 'which item would you like to use? ')
-    while not selection in range(len(matches)):
-        # print matches
-        printMatches(matches)
-        # get user input
-        userInput = input(msg)
-        # convert to int if possible
-        if userInput.isdigit():
-            selection = int(userInput)
-    return selection
 
 # userResolveItem
 # attempt to resolve a single item through user input
@@ -42,7 +16,7 @@ def askUserWhichMatch(matches):
 # @return           string containing a single match resolved through user input
 def userResolveItem(item, matches):
     print('{} dependency \'{}\' has multiple matches'.format(status.WARN, item))
-    return askUserWhichMatch(matches)
+    return util.askUserWhichItem(matches)
 
 # resolveItems
 # resolve all items through user input

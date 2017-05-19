@@ -98,9 +98,26 @@ def exportPortageResumeList(db):
         # get data from dbstore
         data = db.getTargetResumeListData()
         # export data
-        rprl = RestorePRL().export(data)
+        RestorePRL().exportData(data)
     except:
         util.errorAndExit('could not export portage resume list')
+    # print success
+    print('{}: {}'.format(status.SUCCESS, 'successfully exported portage resume list'))
+
+# importPortageResumeList
+# import a portage resume list
+#
+# @param db    portage mtimedb
+def importPortageResumeList(db):
+    try:
+        # get data
+        data = RestorePRL().importData()
+        # store data
+        db.setTargetResumeList(data)
+    except:
+        util.errorAndExit('could not import portage resume list')
+    # print success
+    print('{}: {}'.format(status.SUCCESS, 'successfully imported portage resume list'))
 
 # runScript
 # run script as a function of args

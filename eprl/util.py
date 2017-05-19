@@ -37,6 +37,33 @@ def userConfirmed(data):
             break;
     return confirmed
 
+# printItems
+# print items to console
+#
+# @param items    items to be printed
+def printItems(items):
+    for i in range(len(items)):
+        print('{}: {}'.format(i, items[i]))
+
+# askUserWhichItem
+# ask user which item they'd like to use
+#
+# @param items      items for selection
+# @return           index of user choice
+def askUserWhichItem(items):
+    # init return
+    selection = -1
+    msg = '{}: {}'.format(status.WARN, 'which item would you like to use? ')
+    while not selection in range(len(items)):
+        # print matches
+        printItems(items)
+        # get user input
+        userInput = input(msg)
+        # convert to int if possible
+        if userInput.isdigit():
+            selection = int(userInput)
+    return selection
+
 # userDoesNotHaveRootPrivileges
 # check if user does not have root privileges
 #
