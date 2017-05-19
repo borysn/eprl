@@ -5,6 +5,8 @@ eprl
 
 *list, add, remove portage resume items*
 
+*clear, export, import portage resume list*
+
 install
 -------
 
