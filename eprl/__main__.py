@@ -54,14 +54,16 @@ def listPortageResumeItems(db):
 def removePortageResumeItems(itemNums, db):
     # confirm delete
     if util.userConfirmed(itemNums):
+        # store item names
+        items = []
         # attempt to remove resume item
         try:
-            db.removeItems(itemNums)
+            items = db.removeItems(itemNums)
         except:
             util.errorAndExit('could not remove items from resume list')
         # print success
-        data = tcolor.CTXT(tcolor.PURPLE, itemNums)
-        print('{}: item "{}" removed from portage resume list'.format(status.SUCCESS, data))
+        data = tcolor.CTXT(tcolor.PURPLE, items)
+        print('{}: item(s) removed from portage resume list\n{}'.format(status.SUCCESS, data))
 
 # addPortageResumeItems
 # add item(s) to a portage resume list
@@ -75,7 +77,7 @@ def addPortageResumeItems(items, db):
         util.errorAndExit('could not add items to resume list')
     # print success
     data = tcolor.CTXT(tcolor.PURPLE, items)
-    print('{}: item(s)\n{}\nadded to portage resume list'.format(status.SUCCESS, data))
+    print('{}: item(s) added to portage resume list\n{}'.format(status.SUCCESS, data))
 
 # clearPortageResumeList
 # remove all items from portage resume list

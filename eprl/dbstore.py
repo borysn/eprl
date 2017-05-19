@@ -73,8 +73,6 @@ class DBstore:
     # @param  items    items to be added to the portage resume list
     def addItems(self, items):
         for item in items:
-            # log
-            print('{}: attempting to add {}'.format(status.INFO, tcolor.CTXT(tcolor.PURPLE, item)))
             # create item entry
             entry = ['ebuild', '/', '{}'.format(item), 'merge']
             # add item to dict loaded in memory
@@ -86,7 +84,10 @@ class DBstore:
     # remove item from resume list by item number
     #
     # @param  itemNums    list of item numbers to be removed
+    # @return             list of removed item package names
     def removeItems(self, itemNums):
+        # init return
+        removed = []
         # store resume list locally
         list = self.db[self.target]['mergelist']
         # remove all item nums form the resume list
@@ -96,9 +97,7 @@ class DBstore:
         for i in range(len(list)):
             # ommit item?
             if i in itemNums:
-                # log
-                data = tcolor.CTXT(tcolor.PURPLE, list[i][2])
-                print('{}: attempting to remove {}'.format(status.INFO, data))
+                removed.append(list[i][2])
             else:
                 # don't ommit item
                 tmp.append(list[i])
@@ -106,6 +105,8 @@ class DBstore:
         self.db[self.target]['mergelist'] = tmp
         # write changes to disk
         self.db.commit()
+        # return list of removed item package names
+        return removed
 
     # clearList
     # clear portage resume list
