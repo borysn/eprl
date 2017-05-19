@@ -10,6 +10,7 @@ import sys
 from eprl import util, vargs, dbstore, resolver
 from eprl.colors import tcolor
 from eprl.util import status
+from eprl.restore import RestorePRL
 # catch portage python module import error
 # probably a result of not running as root
 # continue script and attempt to error out
@@ -88,6 +89,19 @@ def clearPortageResumeList(db):
     # print success
     print('{}: successfully cleared portage resume list'.format(status.SUCCESS))
 
+# exportPortageResumeList
+# export a portage resume list
+#
+# @param db    portage mtimedb
+def exportPortageResumeList(db):
+    try:
+        # get data from dbstore
+        data = db.getTargetResumeListData()
+        # export data
+        rprl = RestorePRL().export(data)
+    except:
+        util.errorAndExit('could not export portage resume list')
+
 # runScript
 # run script as a function of args
 #
@@ -134,7 +148,7 @@ def main():
         util.errorAndExit('what to do, what to do...try {}'.format(data))
     # execute script
     runScript(args, db)
-    # exit succes
+    # exit success
     sys.exit(0)
 
 # exec main
