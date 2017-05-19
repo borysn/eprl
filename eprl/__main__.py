@@ -10,6 +10,14 @@ import sys
 from eprl import util, vargs, dbstore, resolver
 from eprl.colors import tcolor
 from eprl.util import status
+# catch portage python module import error
+# probably a result of not running as root
+# continue script and attempt to error out
+# at root privilege check
+try:
+    import portage
+except ImportError:
+    print('hmm, can\'t find portage python module, that\'s not good...')
 
 # printResumeItems
 # output resume item list to console
@@ -30,10 +38,13 @@ def printResumeList(resumeList, target):
 #
 # @param db    mtimedb data store
 def listPortageResumeItems(db):
+    try:
         # print resume items
         printResumeList(db.getResumeList(), db.getTarget())
-        # listing portage resume items was successful
-        print('\n{}: fetch portage resume/resume_backup lists'.format(status.SUCCESS))
+    except:
+        util.errorAndExit('could not list resume items')
+    # print success
+    print('\n{}: fetch portage resume/resume_backup lists'.format(status.SUCCESS))
 
 # removePortageResumeItem
 # remove a portage resume item
@@ -43,7 +54,11 @@ def removePortageResumeItems(itemNums, db):
     # confirm delete
     if util.userConfirmed(itemNums):
         # attempt to remove resume item
-        db.removeItems(itemNums)
+        try:
+            db.removeItems(itemNums)
+        except:
+            util.errorAndExit('could not remove items from resume list')
+        # print success
         print('{}: item "{}" removed from portage resume list'.format(status.SUCCESS, tcolor.CTXT(tcolor.PURPLE, itemNums)))
 
 # addPortageResumeItems
@@ -52,7 +67,11 @@ def removePortageResumeItems(itemNums, db):
 # @param  items    list of possible item entries, just portage package names
 # @param  db       portage mtimedb data store
 def addPortageResumeItems(items, db):
-    db.addItems(items)
+    try:
+        db.addItems(items)
+    except:
+        util.errorAndExit('could not add items to resume list')
+    # print success
     print('{}: item(s)\n{}\nadded to portage resume list'.format(status.SUCCESS, tcolor.CTXT(tcolor.PURPLE, items)))
 
 # runScript
@@ -82,7 +101,10 @@ def main():
     # get args
     args = vargs.parseArgs()
     # init db store for portage mtimedb
-    db = dbstore.DBstore(args.backup)
+    try:
+        db = dbstore.DBstore(args.backup)
+    except:
+        util.errorAndExit('could not init dbstore')
     # validate args, exit if invalid
     if vargs.argsAreNotValid(args, db):
         util.errorAndExit('what to do, what to do...try {}'.format(tcolor.CTXT(tcolor.BLUE, '-h')))
