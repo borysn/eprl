@@ -25,23 +25,20 @@ class DBstore:
         self.db = MtimeDB(portage.mtimedbfile)
         # check if target exists in object
         if not self.target in self.db.keys():
-            self.addEmptyTarget()
+            # create empty target
+            self.db[self.target] = self.createEmptyTarget()
 
     # addEmptyTarget
     # add an empty target to the portage mtimedb loaded in memory
-    def addEmptyTarget(self):
-        # item does not exist, create an entry
+    def createEmptyTarget(self):
         # get default emerge opts using portage config object
-        portcfg = portconfig()
-        edo = portcfg.get('EMERGE_DEFAULT_OPTS').split(' ')
+        edo = portconfig().get('EMERGE_DEFAULT_OPTS').split(' ')
         # create empty target
-        target = {
+        return {
             'mergelist': [],
             'myopts': {'--load-average': edo[1], '--jobs': edo[3]},
             'favorites': []
         }
-        # add empty target to db in memory
-        self.db[self.target] = target;
 
     # getResumeList
     # return resume list
@@ -93,5 +90,13 @@ class DBstore:
                 tmp.append(list[i])
         # save new mergelist
         self.db[self.target]['mergelist'] = tmp
+        # write changes to disk
+        self.db.commit()
+
+    # clearList
+    # clear portage resume list
+    def clearList(self):
+        # clear list in memory
+        self.db[self.target] = self.createEmptyTarget()
         # write changes to disk
         self.db.commit()

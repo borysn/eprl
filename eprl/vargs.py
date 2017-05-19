@@ -115,6 +115,8 @@ def parseArgs():
     parser = argparse.ArgumentParser()
     # list portage resume items
     parser.add_argument('-l', '--list', action='store_true', help='list portage resume items')
+    # clear portage resume list
+    parser.add_argument('-c', '--clear', action='store_true', help='clear portage resume list')
     # remove portage resume item(s)
     parser.add_argument('-r', '--remove', action='store', dest='itemNums', type=int, nargs="+", help='remove portage resume item(s)') 
     # add portage resume item(s)

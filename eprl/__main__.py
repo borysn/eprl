@@ -76,6 +76,18 @@ def addPortageResumeItems(items, db):
     data = tcolor.CTXT(tcolor.PURPLE, items)
     print('{}: item(s)\n{}\nadded to portage resume list'.format(status.SUCCESS, data))
 
+# clearPortageResumeList
+# remove all items from portage resume list
+#
+# @param args    command line arguments
+def clearPortageResumeList(db):
+    try:
+        db.clearList()
+    except:
+        util.errorAndExit('could not clear portage resume list')
+    # print success
+    print('{}: successfully cleared portage resume list'.format(status.SUCCESS))
+
 # runScript
 # run script as a function of args
 #
@@ -84,6 +96,9 @@ def runScript(args, db):
     # list all portage emerge items
     if args.list == True:
         listPortageResumeItems(db)
+    # clear resume list
+    elif args.clear == True:
+        clearPortageResumeList(db)
     # remove portage resume item(s)
     elif args.itemNums != None:
         removePortageResumeItems(args.itemNums, db)
