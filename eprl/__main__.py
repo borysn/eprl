@@ -71,25 +71,29 @@ def removePortageResumeItems(itemNums, db):
 # @param  items    list of possible item entries, just portage package names
 # @param  db       portage mtimedb data store
 def addPortageResumeItems(items, db):
-    try:
-        db.addItems(items)
-    except:
-        util.errorAndExit('could not add items to resume list')
-    # print success
-    data = tcolor.CTXT(tcolor.PURPLE, items)
-    print('{}: item(s) added to portage resume list\n{}'.format(status.SUCCESS, data))
+    # get user confirmation
+    if util.userConfirmed(db):
+        try:
+            db.addItems(items)
+        except:
+            util.errorAndExit('could not add items to resume list')
+        # print success
+        data = tcolor.CTXT(tcolor.PURPLE, items)
+        print('{}: item(s) added to portage resume list\n{}'.format(status.SUCCESS, data))
 
 # clearPortageResumeList
 # remove all items from portage resume list
 #
 # @param args    command line arguments
 def clearPortageResumeList(db):
-    try:
-        db.clearList()
-    except:
-        util.errorAndExit('could not clear portage resume list')
-    # print success
-    print('{}: successfully cleared portage resume list'.format(status.SUCCESS))
+    # get user confirmation
+    if util.userConfirmed(db):
+        try:
+            db.clearList()
+        except:
+            util.errorAndExit('could not clear portage resume list')
+        # print success
+        print('{}: successfully cleared portage resume list'.format(status.SUCCESS))
 
 # exportPortageResumeList
 # export a portage resume list
@@ -111,15 +115,17 @@ def exportPortageResumeList(db):
 #
 # @param db    portage mtimedb
 def importPortageResumeList(db):
-    try:
-        # get data
-        data = RestorePRL().importData()
-        # store data
-        db.setTargetResumeList(data)
-    except:
-        util.errorAndExit('could not import portage resume list')
-    # print success
-    print('{}: {}'.format(status.SUCCESS, 'successfully imported portage resume list'))
+    # get user confirmation
+    if util.userConfirmed(db):
+        try:
+            # get data
+            data = RestorePRL().importData()
+            # store data
+            db.setTargetResumeList(data)
+        except:
+            util.errorAndExit('could not import portage resume list')
+        # print success
+        print('{}: {}'.format(status.SUCCESS, 'successfully imported portage resume list'))
 
 # runScript
 # run script as a function of args
