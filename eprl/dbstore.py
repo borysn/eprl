@@ -54,6 +54,11 @@ class DBstore:
     def getTarget(self):
         return self.target
 
+    # getTargetResumeListData
+    # get the data for the target resume list
+    def getTargetResumeListData(self):
+        return self.db[self.target]
+
     # addItems
     # add item to resume list
     #
