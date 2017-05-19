@@ -59,6 +59,14 @@ class DBstore:
     def getTargetResumeListData(self):
         return self.db[self.target]
 
+    # setTargetResumeList
+    # set the data for the target resume list
+    #
+    # @param data    resume list data
+    def setTargetResumeList(self, data):
+        self.db[self.target] = data
+        self.db.commit()
+
     # addItems
     # add item to resume list
     #
@@ -89,7 +97,8 @@ class DBstore:
             # ommit item?
             if i in itemNums:
                 # log
-                print('{}: attempting to remove {}'.format(status.INFO, tcolor.CTXT(tcolor.PURPLE, list[i][2])))
+                data = tcolor.CTXT(tcolor.PURPLE, list[i][2])
+                print('{}: attempting to remove {}'.format(status.INFO, data))
             else:
                 # don't ommit item
                 tmp.append(list[i])
