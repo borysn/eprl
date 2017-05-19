@@ -50,6 +50,25 @@ def invalidItemNums(args, db):
                 break
     return itemNumsAreInvalid
 
+# resolveAmbiguousItem
+# resolve ambigous item
+#
+# @param args    script arguments
+# @param pstr    packages string from AmbiguousPackageName exception
+# @param item    item in question
+def resolveAmbiguousItem(args, pstr, item, dbapi):
+    # convert to list
+    packages = pstr.translate(dict.fromkeys(map(ord, u"[],\'"))).split(' ')
+    # have user resolve dependency discrepency
+    index = resolver.userResolveItem(item, packages)
+    # attempt to match resolved package
+    # it can be masked, so a match would result in an empty list
+    matches = dbapi.match(packages[index])
+    if len(matches) == 0:
+        util.errorAndExit('looks like the "{}" package is masked'.format(packages[index]), False)
+    # save result in args
+    return packages[index]
+
 # invalidItems
 # check for invalid items
 #
@@ -78,20 +97,12 @@ def invalidItems(args):
                     itemsAreInvalid = True
                     break
             except portage.exception.AmbiguousPackageName as err:
-                # package name too ambiguous, resolve by user
                 # get packages
                 pstr = err.__str__()
-                # convert to list
-                packages = pstr.translate(dict.fromkeys(map(ord, u"[],\'"))).split(' ')
-                # have user resolve dependency discrepency
-                index = resolver.userResolveItem(item, packages)
-                # attempt to match resolved package
-                # it can be masked, so a match would result in an empty list
-                matches = dbapi.match(packages[index])
-                if len(matches) == 0:
-                    util.errorAndExit('looks like the "{}" package is masked'.format(packages[index]), False)
-                # save result in args
-                args.items[args.items.index(item)] = packages[index]
+                # get item index
+                index = args.items.index(item)
+                # have user resolve ambiguous package
+                args.items[index] = resolveAmbiguousItem(args, pstr, item, dbapi)
             except:
                 util.errorAndExit('something went wrong when attempting to validate your listed dependencies')
     # return result
