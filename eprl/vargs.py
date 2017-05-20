@@ -27,8 +27,14 @@ def cantRemoveItem(itemNum, db):
 #
 # @param  args    command line arguments
 # @return         true if no options were specified, false otherwise
-def noOptionsSpecified(args): 
-    return args.list == False and args.clear == False and args.itemNums == None and args.items == None and args.clear == None and args.export == False and args.importing == False
+def noOptionsSpecified(args):
+    return args.backup    == False and \
+           args.clear     == False and \
+           args.export    == False and \
+           args.importing == False and \
+           args.itemNums  == None  and \
+           args.items     == None  and \
+           args.list      == False
 
 # invalidItemNums
 # check for invalid item numbers
