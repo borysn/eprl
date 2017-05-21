@@ -16,7 +16,7 @@ def isInWorldFile(depstr):
     # open world file
     f = open(worldFile, 'r')
     # get file contents
-    content = f.readlines()
+    content = f.read()
     # close file
     f.close()
     # return match or not

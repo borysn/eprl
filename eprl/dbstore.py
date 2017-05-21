@@ -1,6 +1,7 @@
 # dbstore.py
 # author: borysn
 # license: MIT
+from eprl import dbutil
 from eprl.util import status
 from eprl.colors import tcolor
 try:
@@ -75,6 +76,11 @@ class DBstore:
         for item in items:
             # create item entry
             entry = ['ebuild', '/', '{}'.format(item), 'merge']
+            # check for favorite
+            favorite = dbutil.packageIsFavorite(item)
+            if not favorite == None:
+                # set favorite
+                self.db[self.target]['favorites'].append(favorite)
             # add item to dict loaded in memory
             self.db[self.target]['mergelist'].append(entry)
         # write changes to disk
