@@ -76,6 +76,24 @@ def resolveAmbiguousItem(args, pstr, item, dbapi):
     # save result in args
     return packages[index]
 
+# isInvalidItem
+# check if the package name can be matched
+#
+# @param item    item name the user entered
+# @return        true if package can be matched, false otherwise
+def isInvalidItem(item):
+    # get porttree dbapi
+    dbapi = portage.dbapi.porttree.portdbapi()
+    # check for matches
+    if dbapi.match(item) == []:
+        # error
+        print('{}: invalid dependency "{}", cannot add to resume list'.format(status.ERROR, item))
+        # cannot match this item
+        return True
+    # item was succesfully matched
+    return False
+
+
 # invalidItems
 # check for invalid items
 #
@@ -84,34 +102,37 @@ def resolveAmbiguousItem(args, pstr, item, dbapi):
 # @param args    command line arguments
 # @return        true if any items specified are invalid, false otherwise
 def invalidItems(args):
+    # get porttree dbapi
+    dbapi = portage.dbapi.porttree.portdbapi()
     # init return
     itemsAreInvalid = False
+    # store ambiguous packages for user resolution
+    ambiguousPackages = []
     # check if items were given
     if args.items != None:
         # iterate items
         for item in args.items:
-            # init porttree dbapi
-            dbapi = portage.dbapi.porttree.portdbapi()
-            # try to find matches
             try:
-                # find any matches for a given item
-                matches = dbapi.match(item)
-                # no matches
-                if len(matches) == 0:
-                    # error
-                    print('{}: invalid dependency "{}", cannot add to resume list'.format(status.ERROR, item))
-                    # cannot match this item, arg not valid
+                # check if item is valid
+                if isInvalidItem(item):
+                    # set result and break
                     itemsAreInvalid = True
                     break
             except portage.exception.AmbiguousPackageName as err:
                 # get packages
                 pstr = err.__str__()
-                # get item index
-                index = args.items.index(item)
-                # have user resolve ambiguous package
-                args.items[index] = resolveAmbiguousItem(args, pstr, item, dbapi)
+                # store resolution info
+                ambiguousPackages.append({'item':item, 'pstr':pstr})
             except:
                 util.errorAndExit('failed to validate your listed dependencies')
+    # check for any ambiguous packages
+    if not itemsAreInvalid and not ambiguousPackages == []:
+        # iterate packages
+        for p in ambiguousPackages:
+            # get item index
+            index = args.items.index(p['item'])
+            # have user resolve ambiguous package
+            args.items[index] = resolveAmbiguousItem(args, p['pstr'], p['item'], dbapi)
     # return result
     return itemsAreInvalid
 
