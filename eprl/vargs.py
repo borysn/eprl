@@ -97,8 +97,6 @@ def isInvalidItem(item):
 # invalidItems
 # check for invalid items
 #
-# TODO remove duplicates
-#
 # @param args    command line arguments
 # @return        true if any items specified are invalid, false otherwise
 def invalidItems(args):

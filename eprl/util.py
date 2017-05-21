@@ -20,10 +20,8 @@ def errorAndExit(msg, sysflag=True):
 #
 # @param itemNum    item to be deleted
 # @param db         portage mtimedb data store
-# @param data       what is being confirmed?
 # @return           true if user confirmed (said y), false if user did not confirm (said n)
-def userConfirmed(data):
-    # TODO data
+def userConfirmed():
     # init return
     confirmed = False
     msg = '{}: {}'.format(status.WARN, 'are you sure? (y/n) ')

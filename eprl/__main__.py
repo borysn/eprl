@@ -53,7 +53,7 @@ def listPortageResumeItems(db):
 # @param itemNum    valid portage resume item to be removed
 def removePortageResumeItems(itemNums, db):
     # confirm delete
-    if util.userConfirmed(itemNums):
+    if util.userConfirmed():
         # store item names
         items = []
         # attempt to remove resume item
@@ -72,7 +72,7 @@ def removePortageResumeItems(itemNums, db):
 # @param  db       portage mtimedb data store
 def addPortageResumeItems(items, db):
     # get user confirmation
-    if util.userConfirmed(db):
+    if util.userConfirmed():
         try:
             db.addItems(items)
         except:
@@ -87,7 +87,7 @@ def addPortageResumeItems(items, db):
 # @param args    command line arguments
 def clearPortageResumeList(db):
     # get user confirmation
-    if util.userConfirmed(db):
+    if util.userConfirmed():
         try:
             db.clearList()
         except:
@@ -116,7 +116,7 @@ def exportPortageResumeList(db):
 # @param db    portage mtimedb
 def importPortageResumeList(db):
     # get user confirmation
-    if util.userConfirmed(db):
+    if util.userConfirmed():
         try:
             # get data
             data = RestorePRL().importData()
