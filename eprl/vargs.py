@@ -34,7 +34,8 @@ def noOptionsSpecified(args):
            args.importing == False and \
            args.itemNums  == None  and \
            args.items     == None  and \
-           args.list      == False
+           args.list      == False and \
+           args.pydocbs   == None
 
 # invalidItemNums
 # check for invalid item numbers
@@ -139,6 +140,8 @@ def invalidItems(args):
 def parseArgs():
     # get argument parser
     parser = argparse.ArgumentParser()
+    # pydoc fix
+    parser.add_argument('-w', action='store', dest='pydocbs', type=str, nargs='+', help=argparse.SUPPRESS)
     # list portage resume items
     parser.add_argument('-l', '--list', action='store_true', help='list portage resume items')
     # clear portage resume list
