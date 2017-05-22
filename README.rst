@@ -12,7 +12,7 @@ install
 
 ..
 
-1. add `oxenfree </https://github.com/borysn/oxenfree>`_ overlay
+1. add `oxenfree <https://github.com/borysn/oxenfree>`_ overlay
 2. ``$ sudo emerge -a eprl``
 
 run
