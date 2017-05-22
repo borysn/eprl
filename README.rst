@@ -12,7 +12,8 @@ install
 
 ..
 
-    ``$ sudo pip install eprl``
+1. add `oxenfree </https://github.com/borysn/oxenfree>`_ overlay
+1. ``$ sudo emerge -a eprl``
 
 run
 ----
