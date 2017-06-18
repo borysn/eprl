@@ -134,9 +134,9 @@ def invalidItems(args):
     # return result
     return itemsAreInvalid
 
-# parseArgs
-# parse command line options and arguments
-def parseArgs():
+# getArgParser
+# get parser for command line options and arguments
+def getArgParser():
     # get argument parser
     parser = argparse.ArgumentParser()
     # list portage resume items
@@ -157,7 +157,7 @@ def parseArgs():
     parser.add_argument('-v', '--version', action='version', version='eprl version {}'.format(util.getEprlVersion()))
 
     # parse arguments and return
-    return parser.parse_args()
+    return parser
 
 # argsAreNotValid
 # validate commandline options and arguments

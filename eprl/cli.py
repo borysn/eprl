@@ -51,7 +51,13 @@ def main():
     if util.userDoesNotHaveRootPrivileges():
         util.errorAndExit('eprl.py requires root privileges, try running with sudo')
     # get args
-    args = vargs.parseArgs()
+    parser = vargs.getArgParser()
+    # check that we have options
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+    # parse args
+    args = parser.parse_args()
     # init db store for portage mtimedb
     try:
         db = dbstore.DBstore(args.backup)
