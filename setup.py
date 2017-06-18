@@ -30,7 +30,7 @@ setup(
     url='https://github.com/borysn/eprl',
     keywords='python3 script gentoo linux edit portage resume list',
     packages = ['eprl'],
-    entry_points = {'console_scripts': ['eprl=eprl.__main__:main']},
+    entry_points = {'console_scripts': ['eprl=eprl.cli:main']},
     install_requires=[],
     classifiers=[
         'Environment :: Console',

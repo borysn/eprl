@@ -1,5 +1,3 @@
-#!/bin/env python3
-#
 # eprl.py
 # author: borysn | oxenfree
 # license: MIT
@@ -7,18 +5,13 @@
 # edit portage resume list
 #     $ eprl -h
 import sys
-from eprl import util, vargs, dbstore, resolver
+from eprl import util
 from eprl.colors import tcolor
 from eprl.util import status
-from eprl.restore import RestorePRL
-# catch portage python module import error
-# probably a result of not running as root
-# continue script and attempt to error out
-# at root privilege check
 try:
     import portage
 except ImportError:
-    print('hmm, can\'t find portage python module, that\'s not good...')
+    pass
 
 # printResumeItems
 # output resume item list to console
@@ -126,56 +119,3 @@ def importPortageResumeList(db):
             util.errorAndExit('could not import portage resume list')
         # print success
         print('{}: {}'.format(status.SUCCESS, 'successfully imported portage resume list'))
-
-# runScript
-# run script as a function of args
-#
-# @param args       args should be validated before passed in
-def runScript(args, db):
-    # list all portage emerge items
-    if args.list == True:
-        listPortageResumeItems(db)
-    # clear resume list
-    elif args.clear == True:
-        clearPortageResumeList(db)
-    # export resume list
-    elif args.export == True:
-        exportPortageResumeList(db)
-    # import resume list
-    elif args.importing == True:
-        importPortageResumeList(db)
-    # remove portage resume item(s)
-    elif args.itemNums != None:
-        removePortageResumeItems(args.itemNums, db)
-    # add portage resume item(s)
-    elif args.items != None:
-        # resolve dependencies
-        resolvedItems = resolver.resolveItems(args.items)
-        # add to portage resume list
-        addPortageResumeItems(resolvedItems, db)
-
-# main
-# root privilege check, parse & validate args, get mtimedb store, run script
-def main():
-    # check for correct privileges
-    if util.userDoesNotHaveRootPrivileges():
-        util.errorAndExit('eprl.py requires root privileges, try running with sudo')
-    # get args
-    args = vargs.parseArgs()
-    # init db store for portage mtimedb
-    try:
-        db = dbstore.DBstore(args.backup)
-    except:
-        util.errorAndExit('could not init dbstore')
-    # validate args, exit if invalid
-    if vargs.argsAreNotValid(args, db):
-        data = tcolor.CTXT(tcolor.BLUE, '-h')
-        util.errorAndExit('what to do, what to do...try {}'.format(data))
-    # execute script
-    runScript(args, db)
-    # exit success
-    sys.exit(0)
-
-# exec main
-if __name__ == '__main__':
-    main()
