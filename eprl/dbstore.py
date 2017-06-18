@@ -95,20 +95,20 @@ class DBstore:
         # init return
         removed = []
         # store resume list locally
-        list = self.db[self.target]['mergelist']
+        tmpList = self.db[self.target]['mergelist']
         # remove all item nums form the resume list
         # new list with removed items
-        tmp = []
+        newList = []
         # iterate all item numbers building new list with ommitted items
-        for i in range(len(list)):
+        for i in range(len(tmpList)):
             # ommit item?
             if i in itemNums:
-                removed.append(list[i][2])
+                removed.append(tmpList[i][2])
             else:
                 # don't ommit item
-                tmp.append(list[i])
+                newList.append(tmpList[i])
         # save new mergelist
-        self.db[self.target]['mergelist'] = tmp
+        self.db[self.target]['mergelist'] = newList
         # write changes to disk
         self.db.commit()
         # return list of removed item package names
