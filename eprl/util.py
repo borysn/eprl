@@ -71,7 +71,7 @@ def userDoesNotHaveRootPrivileges(): return True if os.getuid() != 0 else False
 # getEprlVersion
 # get the current version of eprl
 def getEprlVersion():
-    return '1.0'
+    return '1.1'
 
 # status
 # status log msg prefixes (with colors)
